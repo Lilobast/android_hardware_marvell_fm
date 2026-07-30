@@ -33,7 +33,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <cstdlib>
 #include <cstring>
 #include <fcntl.h>
-#include <utils/Log.h>
+#include <log/log.h>
 #include <cutils/properties.h>
 #include <sys/ioctl.h>
 #include <math.h>
