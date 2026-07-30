@@ -30,9 +30,9 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define LOG_TAG "android_hardware_fm"
 
 #include <jni.h>
-#include "JNIHelp.h"
-#include "android_runtime/AndroidRuntime.h"
-#include <utils/Log.h>
+#include <nativehelper/JNIHelp.h>
+#include <log/log.h>
+
 #include "FmRadioController.h"
 #include "FM_Const.h"
 
@@ -40,6 +40,8 @@ static FmRadioController * pFMRadio;
 
 jboolean OpenFd(JNIEnv *env, jobject thiz)
 {
+    (void)env;
+    (void)thiz;
     int ret = 0;
     pFMRadio = new FmRadioController();
     if (pFMRadio)
@@ -52,6 +54,8 @@ jboolean OpenFd(JNIEnv *env, jobject thiz)
 
 jboolean CloseFd(JNIEnv *env, jobject thiz)
 {
+    (void)env;
+    (void)thiz;
     int ret = 0;
 
     if (pFMRadio)
@@ -65,6 +69,8 @@ jboolean CloseFd(JNIEnv *env, jobject thiz)
 
 jboolean TurnOn(JNIEnv *env, jobject thiz, jfloat freq)
 {
+    (void)env;
+    (void)thiz;
     int ret = 0;
     int tmp_freq;
 
@@ -84,6 +90,9 @@ jboolean TurnOn(JNIEnv *env, jobject thiz, jfloat freq)
 
 jboolean TurnOff(JNIEnv *env, jobject thiz, jint type)
 {
+    (void)env;
+    (void)thiz;
+    (void)type;
     int ret = 0;
 
     if (pFMRadio)
@@ -101,6 +110,8 @@ jboolean TurnOff(JNIEnv *env, jobject thiz, jint type)
 
 jboolean SetFreq(JNIEnv *env, jobject thiz, jfloat freq)
 {
+    (void)env;
+    (void)thiz;
     int ret = 0;
     int tmp_freq;
 
@@ -116,6 +127,8 @@ jboolean SetFreq(JNIEnv *env, jobject thiz, jfloat freq)
 
 jfloat Seek(JNIEnv *env, jobject thiz, jfloat freq, jboolean isUp)
 {
+    (void)env;
+    (void)thiz;
     int ret = JNI_FALSE;
     float val = freq;
 
@@ -133,6 +146,7 @@ jfloat Seek(JNIEnv *env, jobject thiz, jfloat freq, jboolean isUp)
 
 jshortArray ScanList(JNIEnv *env, jobject thiz)
 {
+    (void)thiz;
     int ret = 0;
     jshortArray scanList;
     int chl_cnt = FM_SCAN_CH_SIZE_MAX;
@@ -162,6 +176,8 @@ out:
 
 jshort GetRdsEvent(JNIEnv *env, jobject thiz)
 {
+    (void)env;
+    (void)thiz;
     int ret = JNI_FALSE;
 
     if (pFMRadio)
@@ -172,6 +188,7 @@ jshort GetRdsEvent(JNIEnv *env, jobject thiz)
 
 jbyteArray GetPsText(JNIEnv *env, jobject thiz)
 {
+    (void)thiz;
     int ret = 0;
     jbyteArray PS;
     char ps[MAX_PS_LEN+1];
@@ -193,6 +210,7 @@ jbyteArray GetPsText(JNIEnv *env, jobject thiz)
 
 jbyteArray GetRtText(JNIEnv *env, jobject thiz)
 {
+    (void)thiz;
     int ret = 0;
     jbyteArray RadioText;
     char rt[MAX_RT_LEN+1];
@@ -214,6 +232,8 @@ jbyteArray GetRtText(JNIEnv *env, jobject thiz)
 
 jshort GetAfFreq(JNIEnv *env, jobject thiz)
 {
+    (void)env;
+    (void)thiz;
     int ret = 0;
     jshort ret_freq = 0;
 
@@ -231,6 +251,8 @@ jshort GetAfFreq(JNIEnv *env, jobject thiz)
 
 jint SetRds(JNIEnv *env, jobject thiz, jboolean rdson)
 {
+    (void)env;
+    (void)thiz;
     int ret = 0;
 
     if (pFMRadio)
@@ -246,6 +268,8 @@ jint SetRds(JNIEnv *env, jobject thiz, jboolean rdson)
 
 jboolean StopSrch(JNIEnv *env, jobject thiz)
 {
+    (void)env;
+    (void)thiz;
     int ret = 0;
 
     if (pFMRadio)
@@ -261,6 +285,8 @@ jboolean StopSrch(JNIEnv *env, jobject thiz)
 
 jint SetMute(JNIEnv *env, jobject thiz, jboolean mute)
 {
+    (void)env;
+    (void)thiz;
     int ret = 0;
 
     if (pFMRadio)
@@ -274,17 +300,10 @@ jint SetMute(JNIEnv *env, jobject thiz, jboolean mute)
     return ret?JNI_FALSE:JNI_TRUE;
 }
 
-/******************************************
- * Inquiry if RDS is support in driver.
- * Parameter:
- *      None
- *Return Value:
- *      1: support
- *      0: NOT support
- *      -1: error
- ******************************************/
 jint IsRdsSupport(JNIEnv *env, jobject thiz)
 {
+    (void)env;
+    (void)thiz;
     int ret = 0;
 
     if (pFMRadio)
@@ -299,19 +318,10 @@ jint IsRdsSupport(JNIEnv *env, jobject thiz)
     return ret;
 }
 
-/******************************************
- * SwitchAntenna
- * Parameter:
- *      antenna:
-                0 : switch to long antenna
-                1: switch to short antenna
- *Return Value:
- *          0: Success
- *          1: Failed
- *          2: Not support
- ******************************************/
 jint SetAntenna(JNIEnv *env, jobject thiz, jint antenna)
 {
+    (void)env;
+    (void)thiz;
     int ret = 0;
     jint jret = 0;
     int ana = -1;
@@ -363,11 +373,12 @@ static JNINativeMethod gMethods[] = {
 
 int register_android_hardware_fm(JNIEnv* env)
 {
-        return jniRegisterNativeMethods(env, classPathNameFM, gMethods, NELEM(gMethods));
+    return jniRegisterNativeMethods(env, classPathNameFM, gMethods, NELEM(gMethods));
 }
 
 jint JNI_OnLoad(JavaVM *jvm, void *reserved)
 {
+   (void)reserved;
    JNIEnv *e;
    int status;
    ALOGI("FM: loading FM-JNI\n");
@@ -383,4 +394,3 @@ jint JNI_OnLoad(JavaVM *jvm, void *reserved)
    }
    return JNI_VERSION_1_6;
 }
-
