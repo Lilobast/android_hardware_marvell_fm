@@ -20,8 +20,9 @@ LOCAL_SHARED_LIBRARIES := \
 LOCAL_PRELINK_MODULE := false
 
 LOCAL_MODULE := libfmjni
+LOCAL_SHARED_LIBRARIES += liblog
 LOCAL_HEADER_LIBRARIES += libnativehelper_header_only
-LOCAL_C_INCLUDES += libnativehelper/include/nativehelper
+LOCAL_C_INCLUDES += libnativehelper/include/nativehelper frameworks/base/core/jni/include
 LOCAL_CFLAGS += -Wno-error  # Pie: legacy Marvell code
 include $(BUILD_SHARED_LIBRARY)
 
