@@ -2,6 +2,7 @@ ifeq ($(BOARD_USES_MRVL_HARDWARE),true)
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
+LOCAL_CFLAGS += -Wno-error  # Pie: legacy Marvell code
 
 LOCAL_SRC_FILES := \
     FmRadioController.cpp \
@@ -20,6 +21,7 @@ LOCAL_SHARED_LIBRARIES := \
 LOCAL_PRELINK_MODULE := false
 
 LOCAL_MODULE := libfmjni
+LOCAL_HEADER_LIBRARIES += libnativehelper_header_only
 include $(BUILD_SHARED_LIBRARY)
 
 endif # MRVL_HARDWARE
